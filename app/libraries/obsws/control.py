@@ -22,14 +22,14 @@ class OBSControl:
         self.__player02.generateId = OBSRequest.find_item_id_by_source_name(OBS_CONST['PLAYER_2P_SCENE_NAME'], OBS_CONST['PLAYER_2P_GENERATE_NAME'])
 
 
-    async def clear_all_stats(self):
+    def clear_all_stats(self):
         OBSRequest.set_item_disabled(OBS_CONST['PLAYER_1P_SCENE_NAME'], self.__player01.maskId)
         OBSRequest.set_item_disabled(OBS_CONST['PLAYER_1P_SCENE_NAME'], self.__player01.generateId)
-        OBSRequest.set_item_disabled(OBS_CONST['PLAYER_1P_SCENE_NAME'], self.__player02.maskId)
-        OBSRequest.set_item_disabled(OBS_CONST['PLAYER_1P_SCENE_NAME'], self.__player02.generateId)
+        OBSRequest.set_item_disabled(OBS_CONST['PLAYER_2P_SCENE_NAME'], self.__player02.maskId)
+        OBSRequest.set_item_disabled(OBS_CONST['PLAYER_2P_SCENE_NAME'], self.__player02.generateId)
 
 
-    async def toggle_player_mask(self, player: int):
+    def toggle_player_mask(self, player: int):
         if player == MAI_CONST['PLAYER_1P'] or player == MAI_CONST['PLAYER_2P']:
             if player == MAI_CONST['PLAYER_1P']:
                 scene = OBS_CONST['PLAYER_1P_SCENE_NAME']
@@ -38,11 +38,9 @@ class OBSControl:
                 scene = OBS_CONST['PLAYER_2P_SCENE_NAME']
                 control = self.__player02
             OBSRequest.toggle_item_enabled(scene, control.maskId)
-            sleep(3.5)
-            OBSRequest.set_item_disabled(scene, control.maskId)
 
     
-    async def show_player_selection(self, player: int):
+    def show_player_selection(self, player: int):
         if player == MAI_CONST['PLAYER_1P'] or player == MAI_CONST['PLAYER_2P']:
             if player == MAI_CONST['PLAYER_1P']:
                 scene = OBS_CONST['PLAYER_1P_SCENE_NAME']
@@ -53,7 +51,7 @@ class OBSControl:
             OBSRequest.set_item_enabled(scene, control.generateId)
 
 
-    async def hide_player_selection(self, player: int):
+    def hide_player_selection(self, player: int):
         if player == MAI_CONST['PLAYER_1P'] or player == MAI_CONST['PLAYER_2P']:
             if player == MAI_CONST['PLAYER_1P']:
                 scene = OBS_CONST['PLAYER_1P_SCENE_NAME']
@@ -64,7 +62,7 @@ class OBSControl:
             OBSRequest.set_item_disabled(scene, control.generateId)
 
     
-    async def toggle_player_selection(self, player: int):
+    def toggle_player_selection(self, player: int):
         if player == MAI_CONST['PLAYER_1P'] or player == MAI_CONST['PLAYER_2P']:
             if player == MAI_CONST['PLAYER_1P']:
                 scene = OBS_CONST['PLAYER_1P_SCENE_NAME']
@@ -82,15 +80,24 @@ class TimingControl:
         self.__ctrl = OBSControl()
 
 
-    async def show_player_selection(self, player: int):
+    def init_screen(self):
+        self.__ctrl.clear_all_stats()
+
+
+    def show_player_selection(self, player: int):
         self.__ctrl.toggle_player_mask(player)
-        await sleep(1)
+        sleep(1)
         self.__ctrl.show_player_selection(player)
+        sleep(2)
+        self.__ctrl.toggle_player_mask(player)
 
 
-    async def clear_player_selection(self):
+    def clear_player_selection(self):
         self.__ctrl.toggle_player_mask(MAI_CONST['PLAYER_1P'])
         self.__ctrl.toggle_player_mask(MAI_CONST['PLAYER_2P'])
-        await sleep(1)
+        sleep(1)
         self.__ctrl.hide_player_selection(MAI_CONST['PLAYER_1P'])
         self.__ctrl.hide_player_selection(MAI_CONST['PLAYER_2P'])
+        sleep(2)
+        self.__ctrl.toggle_player_mask(MAI_CONST['PLAYER_1P'])
+        self.__ctrl.toggle_player_mask(MAI_CONST['PLAYER_2P'])
