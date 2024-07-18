@@ -173,3 +173,7 @@
 |数据名称|类型|数据说明|
 |:-----:|:-------:|:-------:|
 |`message`|`str`|切换场景进程中的实时返回信息|
+
+# LICENSE
+
+(C) 2024 HMT - Hezhou mai Team, build with LOVE & PASSION by KIO & 3.80GHz, under MIT License.
