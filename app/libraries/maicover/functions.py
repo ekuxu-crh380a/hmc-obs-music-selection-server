@@ -22,15 +22,15 @@ def decimalPoints(num,count):
 
 
 def get_cover_path(id):
-    COVER_PATH = DATA_DIR + '/assets/cover'
+    COVER_PATH = DATA_DIR / 'assets/cover'
     id = int(id)
-    if Path(COVER_PATH + f'/{id-10000}.png').exists():
-        return COVER_PATH + f'/{id-10000}.png'
-    if Path(COVER_PATH + f'/{id+10000}.png').exists():
-        return COVER_PATH + f'/{id+10000}.png'
-    if Path(COVER_PATH + f'/{id-100000}.png').exists():
-        return COVER_PATH + f'/{id-100000}.png'
-    if Path(COVER_PATH + f'/{id-110000}.png').exists():
-        return COVER_PATH + f'/{id-110000}.png'
-    if Path(COVER_PATH + f'/{id}.png').exists():
-        return COVER_PATH + f'/{id}.png'
+    if Path(COVER_PATH / f'{id-10000}.png').exists():
+        return COVER_PATH / f'{id-10000}.png'
+    if Path(COVER_PATH / f'{id+10000}.png').exists():
+        return COVER_PATH / f'{id+10000}.png'
+    if Path(COVER_PATH / f'{id-100000}.png').exists():
+        return COVER_PATH / f'{id-100000}.png'
+    if Path(COVER_PATH / f'{id-110000}.png').exists():
+        return COVER_PATH / f'{id-110000}.png'
+    if Path(COVER_PATH / f'{id}.png').exists():
+        return COVER_PATH / f'{id}.png'
