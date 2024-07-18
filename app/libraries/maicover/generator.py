@@ -69,9 +69,9 @@ def generate_cover(player: int, music: Dict, difficulty: int) -> bool:
     baseImgDraw.text(((540-text_width/2),(1712-text_height/2)), artist , "white" , tempFont)
 
     if player == MAI_CONST['PLAYER_1P']:
-        baseImg.save(f"{DATA_DIR}/cover-generated/{OBS_CONST['PLAYER_1P_GENERATE_NAME']}.png")
+        baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_1P_GENERATE_NAME']}.png")
         return True
     elif player == MAI_CONST['PLAYER_2P']:
-        baseImg.save(f"{DATA_DIR}/cover-generated/{OBS_CONST['PLAYER_2P_GENERATE_NAME']}.png")
+        baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_2P_GENERATE_NAME']}.png")
         return True
     return False
