@@ -4,6 +4,8 @@
 
 基于 `obsws-python` SDK 与本地 OBS Studio 通信，通过预编好的场景动效实现选手台上曲目展示的演出效果。
 
+运行DEMO：[https://www.bilibili.com/video/BV1YW42197LT](https://www.bilibili.com/video/BV1YW42197LT)
+
 # 安装及运行
 
 1. 通过 `git clone` 或下载代码包到本地。
