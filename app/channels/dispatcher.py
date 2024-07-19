@@ -9,7 +9,7 @@ def dispatch(ws, raw_data: str):
     if data['mode'] == 'request':
         router(ws, data['endpoint'], data['data'])
         return
-    send(ws, response('index', {'ping': 'OK!'}))
+    send(ws, response('index', {'message': 'OK!'}))
 
 
 def router(ws, endpoint: str, data: Dict):
