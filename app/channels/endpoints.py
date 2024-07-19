@@ -1,5 +1,5 @@
 from app.channels.response import response, error, send
-from app.libraries.maimusic import id2music
+from app.libraries.maimusic import id2music, musiclist
 from app.libraries.maicover.generator import generate_cover
 from app.libraries.obsws.control import TimingControl
 from app.libraries.constants import MAI_CONST
@@ -7,6 +7,24 @@ from typing import Dict
 
 
 class WebSocketEndpoint:
+
+
+    @staticmethod
+    def get_music_list(ws, request: Dict) -> bool:
+        music_list = []
+        raw = musiclist()
+        for music in raw:
+            music_list.append({
+                'id': music['id'],
+                'title': music['basic_info']['title'],
+                'artist': music['basic_info']['artist'],
+                'type': music['type'],
+                'level': music['level'],
+            })
+        send(ws, response('get_music_list', {
+            'music_list': music_list,
+        }))
+        return True
 
 
     @staticmethod
@@ -54,7 +72,7 @@ class WebSocketEndpoint:
             'message': '正在处理1P选曲图......'
         }))
         generate_cover(MAI_CONST['PLAYER_1P'], data, request['difficulty'])
-        send(ws, response('init_screen', {
+        send(ws, response('build_player01_selection', {
             'message': '1P选曲图生成完成！'
         }))
         return True
@@ -83,7 +101,7 @@ class WebSocketEndpoint:
             'message': '正在处理2P选曲图......'
         }))
         generate_cover(MAI_CONST['PLAYER_2P'], data, request['difficulty'])
-        send(ws, response('init_screen', {
+        send(ws, response('build_player01_selection', {
             'message': '2P选曲图生成完成！'
         }))
         return True
