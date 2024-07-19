@@ -154,6 +154,6 @@ class WebSocketEndpoint:
         control = TimingControl()
         control.clear_player_selection()
         send(ws, response('clear_player_selection', {
-            'ping': '清除选曲完成，已返回主屏幕！'
+            'message': '清除选曲完成，已返回主屏幕！'
         }))
         return True
