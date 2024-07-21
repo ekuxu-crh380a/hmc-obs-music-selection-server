@@ -15,6 +15,8 @@
 
 注意：以上场景和输入源的名称最好不要出现中文字符或特殊符号。各输入源的 DEMO 可从 [此链接](https://pixeldrain.com/u/Z3SzmaRz) 获取。
 
+运行DEMO：[https://www.bilibili.com/video/BV1YW42197LT](https://www.bilibili.com/video/BV1YW42197LT)
+
 # 安装及运行
 
 1. 通过 `git clone` 或下载代码包到本地。
@@ -73,7 +75,29 @@
 
 # 接口列表
 
-## 1. `get_music_info`
+## 1. `get_music_list`
+
+### 功能
+
+查询曲库中的所有歌曲信息。
+
+### 返回数据
+
+|数据名称|类型|数据说明|
+|:-----:|:-------:|:-------:|
+|`music_list`|`List<Object>`|含有曲目 ID 、名称、艺术家、等级、谱面类型、难度的数据对象列表|
+
+#### `Object`
+
+|数据名称|类型|数据说明|
+|:-----:|:-------:|:-------:|
+|`id`|`str`|曲目 ID|
+|`title`|`str`|曲目名称|
+|`artist`|`str`|艺术家|
+|`type`|`str`|谱面类型（标准、DX）|
+|`level`|`List<str>`|谱面难度（BASIC、ADVANCED、EXPERT、MASTER、Re:MASTER）|
+
+## 2. `get_music_info`
 
 ### 功能
 
@@ -101,7 +125,7 @@
 |`type`|`str`|谱面类型（标准、DX）|
 |`level`|`List<str>`|谱面难度（BASIC、ADVANCED、EXPERT、MASTER、Re:MASTER）|
 
-## 2. `build_player01_selection`
+## 3. `build_player01_selection`
 
 ### 功能
 
@@ -122,7 +146,7 @@
 |:-----:|:-------:|:-------:|
 |`message`|`str`|构建进程中的实时返回信息|
 
-## 3. `build_player02_selection`
+## 4. `build_player02_selection`
 
 ### 功能
 
@@ -143,7 +167,7 @@
 |:-----:|:-------:|:-------:|
 |`message`|`str`|构建进程中的实时返回信息|
 
-## 4. `init_stage`
+## 5. `init_screen`
 
 ### 功能
 
@@ -155,7 +179,7 @@
 |:-----:|:-------:|:-------:|
 |`message`|`str`|切换场景进程中的实时返回信息|
 
-## 5. `show_player01_selection`
+## 6. `show_player01_selection`
 
 ### 功能
 
@@ -167,7 +191,7 @@
 |:-----:|:-------:|:-------:|
 |`message`|`str`|切换场景进程中的实时返回信息|
 
-## 6. `show_player02_selection`
+## 7. `show_player02_selection`
 
 ### 功能
 
@@ -179,7 +203,7 @@
 |:-----:|:-------:|:-------:|
 |`message`|`str`|切换场景进程中的实时返回信息|
 
-## 7. `clear_player_selection`
+## 8. `clear_player_selection`
 
 ### 功能
 

@@ -8,3 +8,8 @@ def id2music(id):
     for music in music_data:
         if id == music["id"]:
             return music
+        
+
+def musiclist():
+    with open(f"{DATA_DIR}/music_data.json", 'r', encoding='utf-8') as file:
+        return json.load(file)
