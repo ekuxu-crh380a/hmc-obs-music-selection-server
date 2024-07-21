@@ -7,6 +7,8 @@ from typing import Dict
 
 
 def generate_cover(player: int, music: Dict, difficulty: int) -> bool:
+    level_list = ['ba','ad','ex','ma','re']
+    level = level_list[int(difficulty)]
 
     baseImg = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     baseImgDraw = ImageDraw.Draw(baseImg)
@@ -27,35 +29,25 @@ def generate_cover(player: int, music: Dict, difficulty: int) -> bool:
     mask = mask.resize((1080,1920))
     baseImg.paste(mask,(0,0),mask.split()[3])
 
-    wrap = 0
-    level_num = str(music['level'][3])
-    base_tab = Image.open(f"{DATA_DIR}/assets/images/DX_TAB_MS.png").convert('RGBA')
-    if difficulty == MAI_CONST['CHART_MASTER']:
-        Base_Cover = Image.open(f"{DATA_DIR}/assets/images/Base_MST.png").convert('RGBA')
-        if music['type'] == 'DX':
-            base_tab = Image.open(f"{DATA_DIR}/assets/images/DX_TAB_MS.png").convert('RGBA')
-        else:
-            base_tab = Image.open(f"{DATA_DIR}/assets/images/SD_TAB_MS.png").convert('RGBA')
-            wrap = 5
-        level_num = str(music['level'][3])
-        baseImg.paste(Base_Cover,(285,1065),Base_Cover.split()[3])
-    elif difficulty == MAI_CONST['CHART_REMASTER']:
-        Base_Cover = Image.open(f"{DATA_DIR}/assets/images/Base_REM.png").convert('RGBA')
-        if music['type'] == 'DX':
-            wrap = 3
-            base_tab = Image.open(f"{DATA_DIR}/assets/images/DX_TAB_RE.png").convert('RGBA')
-        else:
-            wrap = 3
-            base_tab = Image.open(f"{DATA_DIR}/assets/images/SD_TAB_RE.png").convert('RGBA')
-        level_num = str(music['level'][4])  
-        baseImg.paste(Base_Cover,(287,1067),Base_Cover.split()[3])
+    wrap_list_dx = [0,0,-1,2,3]
+    wrap_list_sd = [0,0,3,7,3]
+
+    Base_Cover = Image.open(f"{DATA_DIR}/assets/images/{level}/Base.png").convert('RGBA')
+    if music['type'] == 'DX':
+        base_tab = Image.open(f"{DATA_DIR}/assets/images/{level}/DX_TAB.png").convert('RGBA')
+        wrap = wrap_list_dx[difficulty]
+    else:
+        base_tab = Image.open(f"{DATA_DIR}/assets/images/{level}/SD_TAB.png").convert('RGBA')
+        wrap = wrap_list_sd[difficulty]
+    baseImg.paste(Base_Cover,(287,1067),Base_Cover.split()[3])
     baseImg.paste(base_tab,(284+wrap,982),base_tab.split()[3])
 
     CoverImg = Image.open(get_cover_path(music['id'])).convert('RGBA')
     CoverImg = BaseCoverImg.resize((417,417))
     baseImg.paste(CoverImg,(335,1102),CoverImg.split()[3])
 
-    level = Image.open(f"{DATA_DIR}/assets/images/{level_num}.png").convert('RGBA')
+    level_num = str(music['level'][difficulty])
+    level = Image.open(f"{DATA_DIR}/assets/images/{level}/{level_num}.png").convert('RGBA')
     baseImg.paste(level,(637,1535),level.split()[3])
 
     tempFont = ImageFont.truetype(f'{DATA_DIR}/assets/fonts/A-OTF-UDShinGoPr6N-Bold.otf', 30, encoding='utf-8')
