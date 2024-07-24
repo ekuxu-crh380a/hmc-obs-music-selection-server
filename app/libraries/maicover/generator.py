@@ -6,7 +6,8 @@ from app.libraries.constants import MAI_CONST, OBS_CONST
 from typing import Dict
 
 
-def generate_cover(player: int, music: Dict, difficulty: int) -> bool:
+def generate_cover(player: int, music: Dict) -> bool:
+    difficulty = music['difficulty']
     level_list = ['ba','ad','ex','ma','re']
     level = level_list[int(difficulty)]
 
@@ -20,11 +21,11 @@ def generate_cover(player: int, music: Dict, difficulty: int) -> bool:
     BaseCoverImg = Image.open(get_cover_path(music['id'])).convert('RGBA')
     BaseCoverImg = BaseCoverImg.resize((1080,1080))
     baseImg.paste(BaseCoverImg,(0,840),BaseCoverImg.split()[3])
-            
+                
     fx = Image.open(f"{DATA_DIR}/assets/images/FX.png").convert('RGBA')
     fx = fx.resize((1080,1080))
     baseImg.paste(fx,(0,840),fx.split()[3])
-            
+                
     mask = Image.open(f"{DATA_DIR}/assets/images/mask.png").convert('RGBA')
     mask = mask.resize((1080,1920))
     baseImg.paste(mask,(0,0),mask.split()[3])
@@ -46,7 +47,7 @@ def generate_cover(player: int, music: Dict, difficulty: int) -> bool:
     CoverImg = BaseCoverImg.resize((417,417))
     baseImg.paste(CoverImg,(335,1102),CoverImg.split()[3])
 
-    level_num = str(music['level'][difficulty])
+    level_num = str(music['level'])
     level = Image.open(f"{DATA_DIR}/assets/images/{level}/{level_num}.png").convert('RGBA')
     baseImg.paste(level,(637,1535),level.split()[3])
 

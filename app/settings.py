@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import logging
+from datetime import date
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,3 +137,13 @@ OBS_WS_HOST          = os.environ.get('OBS_WS_HOST', 'localhost')
 OBS_WS_PORT          = os.environ.get('OBS_WS_PORT', '4455')
 OBS_WS_PASSWORD      = os.environ.get('OBS_WS_PASSWORD', '')
 OBS_WS_TIMEOUT       = os.environ.get('OBS_WS_TIMEOUT', '30')
+
+
+# Logger setting
+
+LOG_PATH = os.environ.get('LOG_PATH', BASE_DIR / 'logs')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s:%(levelname)s:%(filename)s[Line:%(lineno)d]:%(message)s',
+    filename=f'{LOG_PATH}/{date.today()}.log'
+)
