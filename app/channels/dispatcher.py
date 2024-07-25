@@ -1,4 +1,4 @@
-from app.channels.response import response, send, error
+from app.channels.response import response, send, error, RES_STATUS
 from app.channels.endpoints import WebSocketEndpoint
 from typing import Dict
 import logging
@@ -12,7 +12,7 @@ def dispatch(ws, raw_data: str):
         if data['mode'] == 'request':
             router(ws, data['endpoint'], data['data'])
             return
-        send(ws, response(sys._getframe().f_code.co_name, {'message': 'OK!'}))
+        send(ws, response(sys._getframe().f_code.co_name, RES_STATUS['SUCCESS'], {'message': 'OK!'}))
     except Exception as err:
         logging.error(str(err), exc_info=True)
         send(ws, error(sys._getframe().f_code.co_name, str(err)))
@@ -25,4 +25,4 @@ def router(ws, endpoint: str, data: Dict):
         action = getattr(endpoints, endpoint)
         action(ws, data)
         return
-    send(ws, response(sys._getframe().f_code.co_name, {'message': 'OK!'}))
+    send(ws, response(sys._getframe().f_code.co_name, RES_STATUS['SUCCESS'], {'message': 'OK!'}))

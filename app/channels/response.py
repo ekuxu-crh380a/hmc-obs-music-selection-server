@@ -2,10 +2,17 @@ from typing import Dict
 import json
 
 
-def response(endpoint: str, data: Dict) -> Dict:
+RES_STATUS = {
+    'PENDING': 0,
+    'SUCCESS': 1,
+}
+
+
+def response(endpoint: str, status: int, data: Dict) -> Dict:
     return {
         'mode': 'response',
         'endpoint': endpoint,
+        'status': status,
         'data': data,
     }
 
