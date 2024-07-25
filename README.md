@@ -15,13 +15,13 @@
 5. 在两个场景中分别添加 1 个图像输入源，分别定位媒体至对应玩家 P 位的选曲图片。
 6. 在两个场景中分别添加 1 个媒体输入源，定位媒体至过场遮罩视频，遮盖住双方玩家的选曲即可。
 
-注意：以上场景和输入源的名称最好不要出现中文字符或特殊符号。各输入源的 DEMO 可从 [此链接](https://pixeldrain.com/u/Z3SzmaRz) 获取。
+注意：以上场景和输入源的名称最好不要出现中文字符或特殊符号。各输入源的 DEMO 可从 [此链接](https://pixeldrain.com/u/vHSjK5YA) 获取。
 
 ## 安装及运行
 
 1. 通过 `git clone` 或下载代码包到本地。
 2. 进入项目目录，使用 `pip install -r requirements.txt` 下载所需依赖。
-3. 通过 [此链接](https://pixeldrain.com/u/L9YhtHaH) 下载图片资源包，放入项目的 `data` 目录中。
+3. 通过 [此链接](https://pixeldrain.com/u/q9xBUFbk) 下载图片资源包，放入项目的 `data` 目录中。
 4. 复制一份 `example.env` 并重命名为 `.env`，打开并将配置修改成您本地的 OBS WebSocket 连接配置和场景名称。
 5. 通过 `python manage.py runserver` 启动服务。
 6. 使用任意 WebSocket 客户端，连接 `ws://<your_ip>:8000/ws/obs_control/` .
