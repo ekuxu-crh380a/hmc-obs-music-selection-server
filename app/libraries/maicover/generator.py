@@ -52,12 +52,12 @@ def generate_cover(player: int, music: Dict) -> bool:
     baseImg.paste(level,(637,1535),level.split()[3])
 
     tempFont = ImageFont.truetype(f'{DATA_DIR}/assets/fonts/A-OTF-UDShinGoPr6N-Bold.otf', 30, encoding='utf-8')
-    title = truncate_text(music['title'], tempFont, 800)
+    title = truncate_text(music['title'], tempFont, 400)
     text_width, text_height = tempFont.getsize(str(title))
     baseImgDraw.text(((540-text_width/2),(1650-text_height/2)), title , "white" , tempFont)
 
     tempFont = ImageFont.truetype(f"{DATA_DIR}/assets/fonts/A-OTF-UDShinGoPr6N-Regular.otf", 23, encoding='utf-8')
-    artist = truncate_text(music['artist'], tempFont, 800)
+    artist = truncate_text(music['artist'], tempFont, 400)
     text_width, text_height = tempFont.getsize(str(artist))
     baseImgDraw.text(((540-text_width/2),(1712-text_height/2)), artist , "white" , tempFont)
 
