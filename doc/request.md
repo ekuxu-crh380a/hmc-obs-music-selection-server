@@ -19,6 +19,7 @@
 {
     "mode": "response",            // 此处固定为 "response"
     "endpoint": "<endpoint>",      // 此处为 WebSocket 请求的业务端点，详见接口列表
+    "status": 0 | 1,               // 此处为请求状态，0 = 处理中，1 = 已完成
     "data": {                      // 此处为返回数据
         "some_data": "some_value",
         ......

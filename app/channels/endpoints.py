@@ -11,15 +11,7 @@ class WebSocketEndpoint:
 
     @staticmethod
     def get_music_list(ws, request: Dict) -> bool:
-        music_list = []
-        raw = musiclist()
-        if 'level' in request.keys():
-            for music in raw:
-                if music['level'] == request['level']:
-                    music_list.append(music)
-        else:
-            for music in raw:
-                    music_list.append(music)
+        music_list = musiclist()
         send(ws, response('get_music_list', RES_STATUS['SUCCESS'], {
             'music_list': music_list,
         }))
