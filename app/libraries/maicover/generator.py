@@ -6,7 +6,7 @@ from app.libraries.constants import MAI_CONST, OBS_CONST
 from typing import Dict
 
 
-def generate_cover(player: int, music: Dict) -> bool:
+def generate_cover(player: int, track: int, music: Dict) -> bool:
     difficulty = music['difficulty']
     level_list = ['ba','ad','ex','ma','re']
     level = level_list[int(difficulty)]
@@ -62,9 +62,19 @@ def generate_cover(player: int, music: Dict) -> bool:
     baseImgDraw.text(((540-text_width/2),(1712-text_height/2)), artist , "white" , tempFont)
 
     if player == MAI_CONST['PLAYER_1P']:
-        baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_1P_GENERATE_NAME']}.png")
-        return True
+        if track == 1:
+            baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_1P_GENERATE_NAME_TRACK1']}.png")
+            return True
+        elif track == 2:
+            baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_1P_GENERATE_NAME_TRACK2']}.png")
+            return True
+        return False
     elif player == MAI_CONST['PLAYER_2P']:
-        baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_2P_GENERATE_NAME']}.png")
-        return True
+        if track == 1:
+            baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_2P_GENERATE_NAME_TRACK1']}.png")
+            return True
+        elif track == 2:
+            baseImg.save(f"{OBS_CONST['PLAYER_SELECTION_GENERATE_PATH']}/{OBS_CONST['PLAYER_2P_GENERATE_NAME_TRACK2']}.png")
+            return True
+        return False
     return False

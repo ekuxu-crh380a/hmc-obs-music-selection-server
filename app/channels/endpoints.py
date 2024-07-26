@@ -48,14 +48,17 @@ class WebSocketEndpoint:
         if not music:
             send(ws, error('build_player01_selection', f"未找到 ID = {request['music_id']} 的曲目信息"))
             return False
+        if 'track' not in request or (request['track'] != 1 and request['track'] != 2):
+            send(ws, error('build_player01_selection', f"选曲数量不符合要求，请重新提交"))
+            return False
         send(ws, response('build_player01_selection', RES_STATUS['PENDING'], {
             'message': '正在处理1P选曲图......'
         }))
-        if not generate_cover(MAI_CONST['PLAYER_1P'], music):
+        if not generate_cover(MAI_CONST['PLAYER_1P'], request['track'], music):
             send(ws, error('build_player01_selection', f"1P选取图生成失败！请查看日志文件查找原因"))
             return False
         send(ws, response('build_player01_selection', RES_STATUS['SUCCESS'], {
-            'message': '1P选曲图生成完成！'
+            'message': f"1P TRACK{request['track']}选曲图生成完成！"
         }))
         return True
         
@@ -73,14 +76,17 @@ class WebSocketEndpoint:
         if not music:
             send(ws, error('build_player02_selection', f"未找到 ID = {request['music_id']} 的曲目信息"))
             return False
+        if 'track' not in request or (request['track'] != 1 and request['track'] != 2):
+            send(ws, error('build_player02_selection', f"选曲数量不符合要求，请重新提交"))
+            return False
         send(ws, response('build_player02_selection', RES_STATUS['PENDING'], {
             'message': '正在处理2P选曲图......'
         }))
-        if not generate_cover(MAI_CONST['PLAYER_2P'], music):
+        if not generate_cover(MAI_CONST['PLAYER_2P'], request['track'], music):
             send(ws, error('build_player02_selection', f"2P选取图生成失败！请查看日志文件查找原因"))
             return False
         send(ws, response('build_player02_selection', RES_STATUS['SUCCESS'], {
-            'message': '2P选曲图生成完成！'
+            'message': f"2P TRACK{request['track']}选曲图生成完成！"
         }))
         return True
 
@@ -100,26 +106,32 @@ class WebSocketEndpoint:
 
     @staticmethod
     def show_player01_selection(ws, request: Dict) -> bool:
+        if 'track' not in request or (request['track'] != 1 and request['track'] != 2):
+            send(ws, error('show_player01_selection', f"选曲数量不符合要求，请重新提交"))
+            return False
         send(ws, response('show_player01_selection', RES_STATUS['PENDING'], {
             'message': '正在展示1P选曲......'
         }))
         control = TimingControl()
-        control.show_player_selection(MAI_CONST['PLAYER_1P'])
+        control.show_player_selection(MAI_CONST['PLAYER_1P'], request['track'])
         send(ws, response('show_player01_selection', RES_STATUS['SUCCESS'], {
-            'message': '1P选曲展示完成！'
+            'message': f"1P TRACK{request['track']}选曲展示完成！"
         }))
         return True
     
 
     @staticmethod
     def show_player02_selection(ws, request: Dict) -> bool:
+        if 'track' not in request or (request['track'] != 1 and request['track'] != 2):
+            send(ws, error('show_player02_selection', f"选曲数量不符合要求，请重新提交"))
+            return False
         send(ws, response('show_player02_selection', RES_STATUS['PENDING'], {
             'message': '正在展示2P选曲......'
         }))
         control = TimingControl()
-        control.show_player_selection(MAI_CONST['PLAYER_2P'])
+        control.show_player_selection(MAI_CONST['PLAYER_2P'], request['track'])
         send(ws, response('show_player02_selection', RES_STATUS['SUCCESS'], {
-            'message': '2P选曲展示完成！'
+            'message': f"2P TRACK{request['track']}选曲展示完成！"
         }))
         return True
     
